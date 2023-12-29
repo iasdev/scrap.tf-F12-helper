@@ -1,0 +1,34 @@
+function createChecks() {
+   $(".raffle-entered").remove(); // ULTIMO ANADIDO 2
+   var rifas = $(".panel-raffle-items")
+   for(var i = 0; i<rifas.length; i++) {
+       $(rifas[i]).parent().siblings()[1].innerHTML = `<input type='checkbox' id='${i}' name='seleccion'><label for='${i}'>${$(rifas[i]).attr("onclick")}</label></input>`
+   }
+};
+createChecks();
+
+function processChecks(){
+   var seleccion = $("input[name='seleccion']");
+   var seleccionChecked = [];
+   for (var i = 0; i<seleccion.length; i++){
+      if (seleccion[i].checked == true) {
+
+	 var rifa = $($(seleccion[i])[0]).siblings()[0].innerHTML;
+	 seleccionChecked.push(rifa);
+      }
+   }
+   
+   while(seleccionChecked.length != 0) {
+      var rifa = seleccionChecked.splice(0,1)[0]
+
+	function runnn(arg) {
+          window.open(window.location).addEventListener('load', function(event){
+            $($(event.srcElement).find(".panel-title")[0]).append($(` <button id='clickmeee' onclick="${arg}">${arg}</button>`));    
+            $($(event.srcElement).find("#clickmeee")[0]).click(); // ULTIMO ANADIDO 1
+          }, true)
+       }
+
+       runnn(rifa);
+   }
+};
+processChecks();
