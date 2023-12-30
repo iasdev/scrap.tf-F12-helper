@@ -1,12 +1,3 @@
-function createChecks() {
-   $(".raffle-entered").remove(); // ULTIMO ANADIDO 2
-   var rifas = $(".panel-raffle-items")
-   for(var i = 0; i<rifas.length; i++) {
-       $(rifas[i]).parent().siblings()[1].innerHTML = `<input type='checkbox' id='${i}' name='seleccion'><label for='${i}'>${$(rifas[i]).attr("onclick")}</label></input>`
-   }
-};
-createChecks();
-
 function processChecks(){
    var seleccion = $("input[name='seleccion']");
    var seleccionChecked = [];
@@ -24,11 +15,25 @@ function processChecks(){
 	function runnn(arg) {
           window.open(window.location).addEventListener('load', function(event){
             $($(event.srcElement).find(".panel-title")[0]).append($(` <button id='clickmeee' onclick="${arg}">${arg}</button>`));    
-            $($(event.srcElement).find("#clickmeee")[0]).click(); // ULTIMO ANADIDO 1
+            $($(event.srcElement).find("#clickmeee")[0]).click();
           }, true)
        }
 
        runnn(rifa);
    }
 };
+
+function createChecks(checked) {
+   $(".raffle-entered").remove(); 
+   var rifas = $(".panel-raffle-items")
+   for(var i = 0; i<rifas.length; i++) {
+       $(rifas[i]).parent().siblings()[1].innerHTML = `<input type='checkbox' id='${i}' ${checked === true ? 'checked' : ''} name='seleccion'><label for='${i}'>${$(rifas[i]).attr("onclick")}</label></input>`
+   }
+
+   if (checked === true) processChecks();
+};
+
+createChecks(true);
+--------------- --------------- --------------- --------------- --------------- ---------------
+createChecks(false);
 processChecks();
